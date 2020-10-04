@@ -1,0 +1,7 @@
+.register__button {
+
+}
+
+.register__button:focus {
+  outline: none;
+}

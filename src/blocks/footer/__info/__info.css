@@ -1,0 +1,16 @@
+.footer__info {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: normal;
+  font-style: normal;
+  color: #545454;
+  display: inline-block;
+  margin:0;
+}
+
+@media all and (min-width: 300px) and (max-width: 767px) {
+  .footer__info {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

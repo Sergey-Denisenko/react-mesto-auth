@@ -1,0 +1,23 @@
+@import url(./vendor/normalize.css);
+/* @import url(./fonts/fonts.css); */
+@import url(./blocks/body/body.css);
+@import url(./blocks/page/page.css);
+@import url(./blocks/header/header.css);
+@import url(./blocks/content/content.css);
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/card-container/card-container.css);
+@import url(./blocks/card/card.css);
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/popup-avatar-update/popup-avatar-update.css);
+@import url(./blocks/popup-add-card/popup-add-card.css);
+@import url(./blocks/popup-delete-card/popup-delete-card.css);
+@import url(./blocks/popup-image/popup-image.css);
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/_opened/_opened.css);
+@import url(./blocks/popup-profile/popup-profile.css);
+@import url(./blocks/popup-add-card/_opened/_opened.css);
+@import url(./blocks/popup-image/_opened/_opened.css);
+@import url(./blocks/popup-delete-card/_opened/_opened.css);
+@import url(./blocks/popup-avatar-update/_opened/_opened.css);
+@import url(./blocks/register/register.css);
+@import url(./blocks/infoTooltip/infoTooltip.css);

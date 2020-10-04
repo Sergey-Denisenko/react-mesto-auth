@@ -1,0 +1,21 @@
+.popup-card-delete__form-title {
+  width: calc(100% - 36px - 36px);
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 900;
+  font-style: normal;
+  color: #000;
+  margin: 34px 0px 0px;
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .popup-card-delete__form-title {
+    width: calc(100% - 18px - 18px);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 900;
+    font-style: normal;
+    color: #000;
+    margin: 18px 0px 0px;
+  }
+}

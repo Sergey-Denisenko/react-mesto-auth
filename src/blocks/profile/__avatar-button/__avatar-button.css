@@ -1,0 +1,25 @@
+.profile__avatar-button {
+  max-width: 120px;
+  border-radius: 50%;
+  min-height: 120px;
+  max-height: 120px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.profile__avatar-button:focus {
+  outline: none;
+}
+
+.profile__avatar-button:hover {
+  background-image: url("../../../images/edit_pen_pic_big.png");
+  background-color: rgba(0, 0, 0, 0.8);
+
+  display: block;
+}

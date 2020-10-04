@@ -1,0 +1,16 @@
+@import url(./__container/__container.css);
+@import url(./__form-title/__form-title.css);
+@import url(./__form-update/__form-update.css);
+@import url(./__form-image-link/__form-image-link.css);
+@import url(./__form-submit/__form-submit.css);
+@import url(./__form-close-button/__form-close-button.css);
+@import url(../popup/__close-button/__close-button.css);
+@import url(./__error/__error.css);
+@import url(./__error/_visible/_visible.css);
+@import url(./__input/__input.css);
+@import url(./__input/_type_error/_type_error.css);
+@import url(./__button/__button.css);
+@import url(./__button/_disabled/_disabled.css);
+
+.popup-avatar-update {
+  }

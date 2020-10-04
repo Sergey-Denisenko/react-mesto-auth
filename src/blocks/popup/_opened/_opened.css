@@ -1,0 +1,7 @@
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.75s;
+  -webkit-transition: all 0.75s;
+  -moz-transition: all 0.75s;
+}

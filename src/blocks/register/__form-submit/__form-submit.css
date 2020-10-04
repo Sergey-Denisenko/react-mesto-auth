@@ -1,0 +1,31 @@
+.register__form-submit {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border-radius: 2px;
+  color: #000;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+  /* margin-top: 48px; */
+  margin-top: 216px;
+  padding: 0;
+  transition: opacity 0.15s linear 0s;
+  border: none;
+}
+
+.register__form-submit:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .register__form-submit  {
+    margin-top: 36px;
+    font-size: 14px;
+    line-height: 17px;
+    height: 40px;
+  }
+}

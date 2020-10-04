@@ -1,0 +1,36 @@
+@import url(./__container/__container.css);
+@import url(./__form-title/__form-title.css);
+@import url(./__form-profile/__form-profile.css);
+@import url(./__form-email/__form-email.css);
+/* @import url(./__form-image-link/__form-image-link.css); */
+@import url(./__form-password/__form-password.css);
+/* @import url(./__form-close-button/__form-close-button.css); */
+/* @import url(../popup/__close-button/__close-button.css); */
+@import url(./__form-submit/__form-submit.css);
+@import url(./__form-login-link/__form-login-link.css);
+@import url(./__login-link/__login-link.css);
+@import url(./__auth-error-message/__auth-error-message.css);
+
+@import url(./__error/__error.css);
+@import url(./__error/_visible/_visible.css);
+@import url(./__input/__input.css);
+@import url(./__input/_type_error/_type_error.css);
+@import url(./__button/__button.css);
+@import url(./__button/_disabled/_disabled.css);
+
+.register {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  /* transition: all 0.75s; */
+  /* -webkit-transition: all 0.75s; */
+  /* -moz-transition: all 0.75s; */
+  }

@@ -1,0 +1,16 @@
+@import url(./__image/__image.css);
+@import url(./__info/__info.css);
+@import url(./__title/__title.css);
+@import url(./__like/__like.css);
+@import url(./__like-counter/__like-counter.css);
+@import url(./__like/_active-black/_active-black.css);
+@import url(./__trash/__trash.css);
+@import url(./__trash/_disabled/_disabled.css);
+
+.card {
+  width: 282px;
+  height: 361px;
+  margin: auto;
+  display: grid;
+  position: relative;
+}

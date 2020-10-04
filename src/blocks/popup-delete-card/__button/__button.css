@@ -1,0 +1,7 @@
+.popup-card-delete__button {
+
+}
+
+.popup-card-delete__button:focus {
+  outline: none;
+}

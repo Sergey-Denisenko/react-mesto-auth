@@ -1,0 +1,17 @@
+.popup-card-delete__form-profile {
+  width: calc(100% - 36px - 36px);
+  display: block;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 36px;
+  padding: 0;
+  border: none;
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .popup-card-delete__form-profile {
+    width: calc(100% - 18px - 18px);
+    margin-bottom: 18px;
+  }
+}

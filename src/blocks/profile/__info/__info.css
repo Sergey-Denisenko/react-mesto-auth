@@ -1,0 +1,15 @@
+.profile__info {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media all and (min-width: 300px) and (max-width: 1023px) {
+  .profile__info  {
+    align-items: center;
+    width: 100%;
+    margin-left: 26px;
+  }
+}

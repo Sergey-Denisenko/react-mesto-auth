@@ -1,0 +1,11 @@
+.register__auth-error-message {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  box-sizing: border-box;
+  position: absolute;
+  width: inherit;
+}

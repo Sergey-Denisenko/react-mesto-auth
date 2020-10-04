@@ -1,0 +1,21 @@
+.popup-card-delete__form-submit {
+  width: 100%;
+  height: 50px;
+  background: #000;;
+  border-radius: 2px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: normal;
+  font-style: normal;
+  margin-top: 48px;
+  padding: 0;
+  transition: opacity 0.15s linear 0s;
+  border: none;
+}
+
+.popup-card-delete__form-submit:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

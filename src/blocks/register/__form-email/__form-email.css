@@ -1,0 +1,23 @@
+.register__form-email {
+  padding: 0px 0px 13px 0px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: normal;
+  font-style: normal;
+  outline: none;
+  border: 0;
+  border-bottom: 2px solid rgba(204, 204, 204, 1);;
+  color: #CCCCCC;
+  box-shadow: none;
+  background-color: #000;
+
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .register__form-email {
+    font-size: 12px;
+    line-height: 12px;
+    padding-bottom: 8px;
+  }
+}

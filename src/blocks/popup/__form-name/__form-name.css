@@ -1,0 +1,11 @@
+.popup__form-name {
+  padding: 0px 0px 13px 0px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: normal;
+  font-style: normal;
+  outline: none;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}

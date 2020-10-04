@@ -1,0 +1,52 @@
+.popup-add-card__form-profile {
+  width: calc(100% - 36px - 36px);
+  display: block;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 36.51px;
+  padding: 0;
+  border: none;
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .popup-add-card__form-profile {
+    width: calc(100% - 18px - 18px);
+    margin-bottom: 30px;
+    margin-top: 17px;
+  }
+}
+
+input::placeholder {
+  font-family: inherit;
+  color:#C4C4C4;
+}
+input::-webkit-input-placeholder {
+  font-family: inherit;
+  color:#C4C4C4;
+}
+input::-moz-placeholder {
+  font-family: inherit;
+  color:#C4C4C4;
+}
+input::-ms-input-placeholder {
+  font-family: inherit;
+  color:#C4C4C4;
+}
+
+:focus::placeholder {
+  font-family: inherit;
+  color:#C4C4C4;
+}
+:focus::-webkit-input-placeholder {
+  color: transparent
+}
+:focus::-moz-placeholder {
+  color: transparent
+}
+:focus:-moz-placeholder {
+  color: transparent
+}
+:focus:-ms-input-placeholder {
+  color: transparent
+}

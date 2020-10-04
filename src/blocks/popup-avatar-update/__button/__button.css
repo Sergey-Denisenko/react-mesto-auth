@@ -1,0 +1,7 @@
+.popup-avatar-update__button {
+
+}
+
+.popup-avatar-update__button:focus {
+  outline: none;
+}
