@@ -22,18 +22,20 @@ function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister,
     apiAuth.register(email, password)
     .then((res) => {
       if(res.status !== 400) {
-        onRegister();
-        history.push('/sign-in');
+        // onRegister();
+        // history.push('/sign-in');
       } else
         onInfoTooltipOpen();
         setMessage('Некорректно заполнено одно из полей ');
     })
     .then((data) => {
+      onRegister();
       onInfoTooltipOpen();
+      history.push('/sign-in');
     })
     .catch((err) => {
       setMessage('Что-то пошло не так!');
-      console.error(err);
+      console.log(err);
     });
   }
 

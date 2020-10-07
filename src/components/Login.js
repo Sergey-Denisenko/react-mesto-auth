@@ -32,7 +32,7 @@ function Login({isSubmitDataSendState, handleSubmitDataSendState, onLogin}) {
     })
     .catch((err) => {
       setMessage('Что-то пошло не так!')
-      console.error(err);
+      console.log(err);
     });
   }
 

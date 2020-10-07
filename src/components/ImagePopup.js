@@ -2,9 +2,9 @@ import React from 'react';
 
 function ImagePopup({card, onClose, closeAllPopups, resetSelectedCardInImagePopup}) {
 
-  if (onClose === true) {
-    document.querySelector('.popup-image').classList.remove('popup-image_opened');
-  }
+  // if (onClose === true) {
+  //   document.querySelector('.popup-image').classList.remove('popup-image_opened');
+  // }
 
   return (
     <div className={`popup-image popup popup__overlay ${card ? 'popup-image_opened' : ''}`}>
