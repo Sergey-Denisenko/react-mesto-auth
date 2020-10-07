@@ -2,15 +2,11 @@
 @import url(./__form-title/__form-title.css);
 @import url(./__form-profile/__form-profile.css);
 @import url(./__form-email/__form-email.css);
-/* @import url(./__form-image-link/__form-image-link.css); */
 @import url(./__form-password/__form-password.css);
-/* @import url(./__form-close-button/__form-close-button.css); */
-/* @import url(../popup/__close-button/__close-button.css); */
 @import url(./__form-submit/__form-submit.css);
 @import url(./__form-login-link/__form-login-link.css);
 @import url(./__login-link/__login-link.css);
 @import url(./__auth-error-message/__auth-error-message.css);
-
 @import url(./__error/__error.css);
 @import url(./__error/_visible/_visible.css);
 @import url(./__input/__input.css);
@@ -28,9 +24,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* visibility: hidden; */
-  /* opacity: 0; */
-  /* transition: all 0.75s; */
-  /* -webkit-transition: all 0.75s; */
-  /* -moz-transition: all 0.75s; */
-  }
+}

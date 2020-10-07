@@ -5,4 +5,10 @@
   line-height: 22px;
   font-style: normal;
   color: #fff;
+  margin: 0;
+  display: contents;
+}
+
+.header__auth_link:hover {
+  cursor: pointer;
 }

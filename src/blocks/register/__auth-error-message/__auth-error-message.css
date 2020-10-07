@@ -8,4 +8,5 @@
   box-sizing: border-box;
   position: absolute;
   width: inherit;
+  margin-top: 10px;
 }

@@ -1,10 +1,21 @@
-.infoTooltip__container{
-  background: transparent;
-  border: none;
+.infotooltip__container {
+  position: fixed;
+  top: calc(50% - 165px);
+  left: calc(50% - 215px);
+  width: 430px;
+  height: 330px;
+  background: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  /* margin: auto; */
+  margin: auto;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* align-items: center; */
+  align-items: center;
+}
+
+@media all and (min-width: 300px) and (max-width: 550px) {
+  .infotooltip__container {
+    left: calc(50% - 109px);
+    width: 218px;
+  }
 }

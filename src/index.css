@@ -20,4 +20,5 @@
 @import url(./blocks/popup-delete-card/_opened/_opened.css);
 @import url(./blocks/popup-avatar-update/_opened/_opened.css);
 @import url(./blocks/register/register.css);
-@import url(./blocks/infoTooltip/infoTooltip.css);
+@import url(./blocks/infotooltip/infotooltip.css);
+@import url(./blocks/infotooltip/_opened/_opened.css);

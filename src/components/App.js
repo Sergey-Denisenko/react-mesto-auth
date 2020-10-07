@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
-
+import { useEffect } from 'react';
+import { Route, Switch, Redirect, useHistory, withRouter } from 'react-router-dom';
 import Register from './Register.js';
 import Login from './Login.js';
 import InfoTooltip from './InfoTooltip.js';
 import ProtectedRoute from './ProtectedRoute';
-
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -17,12 +16,13 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import PopupDeleteConfirm from './PopupDeleteConfirm';
 //import FomrValidation from '../utils/FormValidator';
+import * as apiAuth from '../utils/apiAuth';
 
 function App() {
-
-  const [loggedIn, setLoggedIn] = React.useState(false)
-
-  const [onClose, setOnClose] = React.useState(false)
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [onClose, setOnClose] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -31,6 +31,7 @@ function App() {
   // const handleCardDeletePopupOpen = () => {
   //   setIsCardDeletePopupOpen(!isCardDeletePopupOpen);
   // };
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -49,8 +50,8 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-
     setIsCardDeletePopupOpen(false);
+    setIsInfoTooltipOpen(false);
   };
 
   function handleUpdateUser(userData) {
@@ -119,7 +120,6 @@ function App() {
     };
   }, []);
 
-
   function handleAddPlaceSubmit(userCardData) {
     api.addNewCardToServer(userCardData)
     .then((newCard) => {
@@ -162,7 +162,7 @@ function App() {
   const handleCardDeleteClick = (card) => {
     setIsCardDeletePopupOpen(!isCardDeletePopupOpen);
     setTempCardForDelete(card);
-  }
+  };
 
   function handleCardDeleteSubmit(evt) {
     evt.preventDefault();
@@ -180,7 +180,7 @@ function App() {
     })
     return () => {
     }
-  };
+  }
 
 // Тескт на кнопках при загрухке данных
   const [isSubmitDataSendState, setIsSubmitDataSendState] = React.useState(false);
@@ -189,64 +189,96 @@ function App() {
     setIsSubmitDataSendState(!isSubmitDataSendState);
   };
 
-const q = () => {
-  setLoggedIn(!loggedIn);
-}
+// Добавление нового функционала
+
+  const [isRegister, setIsRegister] = React.useState(false);
+
+  const handleIsRegister = () => {
+    setIsRegister(!isRegister);
+  };
+
+  const onRegister = () => {
+    handleIsRegister();
+  };
+
+  const onInfoTooltipOpen = () => {
+    setIsInfoTooltipOpen(true);
+  };
+
+  const onLogin = () => {
+    setLoggedIn(true);
+    tokenCheck();
+  };
+
+  const onSignOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    history.push('/sign-in');
+    setEmail('');
+    setPassword('');
+  };
+
+  const history = useHistory();
+
+  const tokenCheck = () => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      apiAuth.getContent(token)
+        .then(res => res)
+        .then((res) => {
+          setLoggedIn(true);
+          history.push('/');
+          setEmail(localStorage.getItem('email'));
+        });
+    }
+  };
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   return (
-    // <BrowserRouter>
-
-
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          {/* <Header /> */}
+          {loggedIn && email ? <Header emailUser={email} routePathName={ 'Выход' } routePath={ '/sign-in' } loggedIn={loggedIn} onSignOut={onSignOut} /> : ''}
 
           <Switch>
-            {/* <Route path="/infoTooltip">
-              <InfoTooltip />
-            </Route> */}
             <Route path="/sign-up"> {/* регистрация пользователя */}
               <Header routePathName={ 'Войти' } routePath={ '/sign-in' } />
-              <Register />
+              <Register isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState} onRegister={onRegister} onInfoTooltipOpen={onInfoTooltipOpen}/>
             </Route>
 
             <Route path="/sign-in"> {/* авторизация пользователя - вход */}
               <Header routePathName={ 'Регистрация' } routePath={ '/sign-up' } />
-              <Login />
+              <Login isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState} onLogin={onLogin}/>
             </Route>
-            <ProtectedRoute path="/cards" loggedIn={loggedIn}>
-            {/* <Route path="/cards"> */}
-              <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onClose={onClose} closeAllPopups={closeAllPopups}
-              cards={cards} onCardLike={handleCardLike} setOnClose={setOnClose} onCardDeleteClick={handleCardDeleteClick} />
 
-              {/* <Footer /> */}
-
-              <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
-
-              <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
-
-              <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
-
-              <PopupDeleteConfirm isOpen={isCardDeletePopupOpen} onClose={closeAllPopups} onCardDelete={handleCardDeleteSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
-            {/* </Route> */}
-            </ProtectedRoute>
-
+            <ProtectedRoute path="/" loggedIn={loggedIn} component={Main} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onClose={onClose} closeAllPopups={closeAllPopups} cards={cards} onCardLike={handleCardLike} setOnClose={setOnClose} onCardDeleteClick={handleCardDeleteClick} />
 
             <Route>
-              {loggedIn ? <Redirect to='cards' /> : <Redirect to='sign-in' />}
+              {loggedIn === true ? <Redirect to='/' /> : <Redirect to='/sign-in' />}
             </Route>
-            {/* {<Redirect to={`/${loggedIn === true ? 'cards' : 'login'}`} />} */}
 
+            <Route path="*">
+              <Redirect to='/sign-in' />
+            </Route>
           </Switch>
-          <Footer />
         </div>
+        <Footer />
+
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={onClose} closeAllPopups={closeAllPopups} isRegister={isRegister}/>
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+
+        <PopupDeleteConfirm isOpen={isCardDeletePopupOpen} onClose={closeAllPopups} onCardDelete={handleCardDeleteSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
       </CurrentUserContext.Provider>
     </div>
-
-
-    // </BrowserRouter>
   );
 }
 
-export default App;
+export default withRouter(App);

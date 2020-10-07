@@ -1,5 +1,6 @@
 .header__auth{
-  border: 1px solid yellow;
   text-align: right;
   margin-top: 6px;
+  display: flex;
+  flex-direction: row;
 }
