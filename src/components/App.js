@@ -231,6 +231,10 @@ function App() {
           setLoggedIn(true);
           history.push('/');
           setEmail(localStorage.getItem('email'));
+        })
+        .catch(() => {
+          setLoggedIn(false);
+          history.push('/sign-in');
         });
     }
   };
@@ -258,15 +262,15 @@ function App() {
             </Route>
 
             <ProtectedRoute path="/" loggedIn={loggedIn} component={Main} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onClose={onClose} closeAllPopups={closeAllPopups} cards={cards} onCardLike={handleCardLike} setOnClose={setOnClose} onCardDeleteClick={handleCardDeleteClick} />
-
-            <Route>
-              {loggedIn === true ? <Redirect to='/' /> : <Redirect to='/sign-in' />}
-            </Route>
-
-            <Route path="*">
-              <Redirect to='/sign-in' />
-            </Route>
           </Switch>
+
+          <Route>
+            {loggedIn === false ? <Redirect to='/sign-in' /> : <Redirect to='/' />}
+          </Route>
+
+          <Route path="*">
+            <Redirect to='/sign-in' />
+          </Route>
         </div>
         <Footer />
 
