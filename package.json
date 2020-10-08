@@ -1,10 +1,10 @@
 {
-  "name": "mesto-react-auth",
+  "name": "react-mesto-auth",
   "version": "0.1.0",
   "private": true,
   "author": "Sergey Denisenko",
   "description": "Mesto-react project. Here people can add favorite photo and put likes to they or put likes to photo of another people",
-  "homepage": "https://sergey-denisenko.github.io/mesto-react-auth/",
+  "homepage": "https://sergey-denisenko.github.io/react-mesto-auth/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
