@@ -218,6 +218,8 @@ function App() {
     history.push('/sign-in');
     setEmail('');
     setPassword('');
+    setLoggedIn(false);
+    setIsRegister(false);
   };
 
   const history = useHistory();
