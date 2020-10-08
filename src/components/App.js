@@ -21,6 +21,7 @@ import * as apiAuth from '../utils/apiAuth';
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
+  // eslint-disable-next-line
   const [password, setPassword] = React.useState('');
   const [onClose, setOnClose] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -118,6 +119,7 @@ function App() {
     })
     return () => {
     };
+    // eslint-disable-next-line
   }, []);
 
   function handleAddPlaceSubmit(userCardData) {
@@ -235,10 +237,11 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <div className="App">
+    <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           {loggedIn && email ? <Header emailUser={email} routePathName={ 'Выход' } routePath={ '/sign-in' } loggedIn={loggedIn} onSignOut={onSignOut} /> : ''}

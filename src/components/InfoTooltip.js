@@ -13,7 +13,7 @@ function InfoTooltip({isOpen, closeAllPopups, isRegister}) {
           <button onClick={closeAllPopups} type="button" className="popup__form-close-button popup__close-button" />
         </form>
       </div>
-      ) :  isRegister === false && isOpen ? (
+      ) : isRegister === false && isOpen ? (
       <div className={`infotooltip infotooltip__overlay ${isOpen ? 'infotooltip_opened' : ''}`}>
         <form id="form-popup" className="infotooltip__container">
             <img className="infotooltip__image" src={unSuccessImagePath}  alt="Регистрация не пройдена"/>

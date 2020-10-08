@@ -17,3 +17,5 @@ ____
 :white_check_mark: *способность здраво мыслить, фантазия и творческий потенциал*
 
 ____
+
+*Посмотреть работу можно по ссылке https://sergey-denisenko.github.io/react-mesto-auth/* :+1:

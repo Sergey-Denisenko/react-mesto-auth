@@ -19,28 +19,35 @@ function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister,
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
+
     apiAuth.register(email, password)
     .then((res) => {
       if(res.status !== 400) {
-        // onRegister();
-        // history.push('/sign-in');
-      } else
+        return res;
+      } else {
         onInfoTooltipOpen();
         setMessage('Некорректно заполнено одно из полей ');
+        return;
+      }
     })
     .then((data) => {
+      if(data) {
       onRegister();
       onInfoTooltipOpen();
       history.push('/sign-in');
+      }
     })
     .catch((err) => {
       setMessage('Что-то пошло не так!');
       console.log(err);
+    })
+    .finally(() => {
+      handleSubmitDataSendState();
     });
   }
 
   return(
-    <PopupWithForm name="register" title="Регистрация" isOpen={true} onSubmit={handleSubmit} isSubmitDataSendState={isSubmitDataSendState} submitButtonText = {'Зарегистрироваться'} handleSubmitDataSendState={handleSubmitDataSendState}>
+    <PopupWithForm name="register" title="Регистрация" isOpen={true} onSubmit={handleSubmit} isSubmitDataSendState={isSubmitDataSendState} submitButtonText = {isSubmitDataSendState === false ? 'Зарегистрироваться' : 'Идет регистрация...'} handleSubmitDataSendState={handleSubmitDataSendState}>
       <input id="email-input" type="email" value={email} onChange={handleChangeEmail} className="register__form-email popup__input" name="email" minLength="2" maxLength="40" autoComplete="off" required placeholder="Email" />
       <span id="email-input-error" className="register__error" />
       <input id="password-input" type="password" value={password} onChange={handleChangePassword} className="register__form-password popup__input" name="password" minLength="2" maxLength="200" autoComplete="off" required placeholder="Пароль" />

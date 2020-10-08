@@ -6,4 +6,10 @@
     color: #FFF;
     text-align: center;
     text-decoration: none;
+    transition: opacity 0.15s linear 0s;
+  }
+
+  .register__login-link:hover {
+    cursor: pointer;
+    opacity: 0.6;
   }
