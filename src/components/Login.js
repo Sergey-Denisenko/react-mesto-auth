@@ -18,21 +18,23 @@ function Login({isSubmitDataSendState, handleSubmitDataSendState, onLogin}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    setMessage('');
     apiAuth.login(email, password)
     .then((res) => {
-      if(res.status === 401) {
-        setMessage('Пользователь с email не найден')
-      } else if (res.status === 400) {
-        setMessage('Не передано одно из полей')
-      }
-       else if (res.token) {
+      if (res.token) {
         setEmail(localStorage.getItem('email'));
         onLogin();
       }
     })
     .catch((err) => {
-      setMessage('Что-то пошло не так!')
-      console.log(err);
+      if(err.status === 401) {
+        setMessage('Пользователь с email не найден');
+      } else if (err.status === 400) {
+        setMessage('Не передано одно из полей');
+      } else {
+        setMessage('Что-то пошло не так!');
+        console.log(err);
+      }
     })
     .finally(() => {
       handleSubmitDataSendState();

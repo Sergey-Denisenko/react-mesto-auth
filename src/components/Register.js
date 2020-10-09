@@ -19,17 +19,9 @@ function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister,
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-
+    setMessage('');
     apiAuth.register(email, password)
-    .then((res) => {
-      if(res.status !== 400) {
-        return res;
-      } else {
-        onInfoTooltipOpen();
-        setMessage('Некорректно заполнено одно из полей ');
-        return;
-      }
-    })
+    .then(res => res)
     .then((data) => {
       if(data) {
       onRegister();
@@ -38,8 +30,13 @@ function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister,
       }
     })
     .catch((err) => {
-      setMessage('Что-то пошло не так!');
-      console.log(err);
+      if(err.status === 400) {
+        onInfoTooltipOpen();
+        setMessage('Некорректно заполнено одно из полей ');
+      } else {
+        setMessage('Что-то пошло не так!');
+        console.log(err);
+      }
     })
     .finally(() => {
       handleSubmitDataSendState();

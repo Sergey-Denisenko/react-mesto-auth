@@ -17,9 +17,6 @@ export const register = (email, password) => {
   })
   .then((res) => {
     return (res);
-  })
-  .catch((err) => {
-    return (err);
   });
 }
 
@@ -45,10 +42,7 @@ export const login = (email, password) => {
       return data;
     } else {
       return
-    };
-  })
-  .catch((err) => {
-    return (err);
+    }
   });
 }
 
@@ -61,7 +55,12 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-  .then(res => res.json())
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res);
+  })
   .then(res => res)
   .then((data) => {
     if (data.data.email) {
@@ -70,8 +69,5 @@ export const getContent = (token) => {
     } else {
       return
     }
-  })
-  .catch((err) => {
-    return (err);
   });
 }

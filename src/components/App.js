@@ -234,9 +234,16 @@ function App() {
           history.push('/');
           setEmail(localStorage.getItem('email'));
         })
-        .catch(() => {
-          setLoggedIn(false);
-          history.push('/sign-in');
+        .catch((err) => {
+          if(err.status === 401) {
+            console.log('Переданный токен некорректен');
+          } else if(err.status === 400) {
+            console.log('Токен не передан или передан не в том формате');
+          } else {
+            setLoggedIn(false);
+            history.push('/sign-in');
+            console.log(err);
+          }
         });
     }
   };
