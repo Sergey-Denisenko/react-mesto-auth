@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/react-mesto-auth/static/css/main.7743d495.chunk.css",
-    "main.js": "/react-mesto-auth/static/js/main.e3c31c72.chunk.js",
-    "main.js.map": "/react-mesto-auth/static/js/main.e3c31c72.chunk.js.map",
-    "runtime-main.js": "/react-mesto-auth/static/js/runtime-main.0e88f56d.js",
-    "runtime-main.js.map": "/react-mesto-auth/static/js/runtime-main.0e88f56d.js.map",
-    "static/js/2.15e2418e.chunk.js": "/react-mesto-auth/static/js/2.15e2418e.chunk.js",
-    "static/js/2.15e2418e.chunk.js.map": "/react-mesto-auth/static/js/2.15e2418e.chunk.js.map",
-    "index.html": "/react-mesto-auth/index.html",
-    "precache-manifest.068ecd542006dbbc301aa8b0bb415589.js": "/react-mesto-auth/precache-manifest.068ecd542006dbbc301aa8b0bb415589.js",
-    "service-worker.js": "/react-mesto-auth/service-worker.js",
-    "static/css/main.7743d495.chunk.css.map": "/react-mesto-auth/static/css/main.7743d495.chunk.css.map",
-    "static/js/2.15e2418e.chunk.js.LICENSE.txt": "/react-mesto-auth/static/js/2.15e2418e.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/react-mesto-auth/static/media/heart_like_black.5bbb05f7.svg",
-    "static/media/Vector_white.svg": "/react-mesto-auth/static/media/Vector_white.c6f11019.svg"
+    "main.css": "/static/css/main.9f72913a.chunk.css",
+    "main.js": "/static/js/main.a1d5b379.chunk.js",
+    "main.js.map": "/static/js/main.a1d5b379.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1de49aa2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1de49aa2.js.map",
+    "static/js/2.f0f66cc5.chunk.js": "/static/js/2.f0f66cc5.chunk.js",
+    "static/js/2.f0f66cc5.chunk.js.map": "/static/js/2.f0f66cc5.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4c9a979fa0f81b3712084f2174cf3ce5.js": "/precache-manifest.4c9a979fa0f81b3712084f2174cf3ce5.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.9f72913a.chunk.css.map": "/static/css/main.9f72913a.chunk.css.map",
+    "static/js/2.f0f66cc5.chunk.js.LICENSE.txt": "/static/js/2.f0f66cc5.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/heart_like_black.5bbb05f7.svg",
+    "static/media/Vector_white.svg": "/static/media/Vector_white.c6f11019.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0e88f56d.js",
-    "static/js/2.15e2418e.chunk.js",
-    "static/css/main.7743d495.chunk.css",
-    "static/js/main.e3c31c72.chunk.js"
+    "static/js/runtime-main.1de49aa2.js",
+    "static/js/2.f0f66cc5.chunk.js",
+    "static/css/main.9f72913a.chunk.css",
+    "static/js/main.a1d5b379.chunk.js"
   ]
 }
