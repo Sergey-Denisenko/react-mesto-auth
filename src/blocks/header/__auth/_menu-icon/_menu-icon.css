@@ -1,0 +1,11 @@
+.header__auth_menu-icon {
+  height: 27px;
+  display: none;
+  margin: 0;
+}
+
+@media all and (min-width: 300px) and (max-width: 767px) {
+  .header__auth_menu-icon {
+    display: block;
+  }
+}

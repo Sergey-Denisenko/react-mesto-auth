@@ -199,17 +199,63 @@ function App() {
     setIsRegister(!isRegister);
   };
 
-  const onRegister = () => {
-    handleIsRegister();
+  const setClearMessage = () => {
+    setMessage('');
+  }
+
+  const [message, setMessage] = React.useState('');
+  const onRegister = (email, password) => {
+    setClearMessage();
+    apiAuth.register(email, password)
+    .then(res => res)
+    .then((data) => {
+      if(data) {
+        handleIsRegister();
+        onInfoTooltipOpen();
+        history.push('/sign-in');
+      }
+    })
+    .catch((err) => {
+      if(err.status === 400) {
+        onInfoTooltipOpen();
+        setMessage('Некорректно заполнено одно из полей ');
+      } else {
+        setMessage('Что-то пошло не так!');
+        console.log(err);
+      }
+    })
+    .finally(() => {
+      handleSubmitDataSendState();
+    });
   };
 
   const onInfoTooltipOpen = () => {
     setIsInfoTooltipOpen(true);
   };
 
-  const onLogin = () => {
-    setLoggedIn(true);
-    tokenCheck();
+  const onLogin = (email, password) => {
+    setClearMessage();
+    apiAuth.login(email, password)
+    .then((res) => {
+      if (res.token) {
+        setEmail(localStorage.getItem('email'));
+        setLoggedIn(true);
+        tokenCheck();
+      }
+    })
+    .catch((err) => {
+      if(err.status === 401) {
+        setMessage('Пользователь с email не найден');
+      } else if (err.status === 400) {
+        setMessage('Не передано одно из полей');
+      } else {
+        setMessage('Что-то пошло не так!');
+        console.log(err);
+      }
+    })
+    .finally(() => {
+      handleSubmitDataSendState();
+    });
   };
 
   const onSignOut = () => {
@@ -262,15 +308,39 @@ function App() {
           <Switch>
             <Route path="/sign-up"> {/* регистрация пользователя */}
               <Header routePathName={ 'Войти' } routePath={ '/sign-in' } />
-              <Register isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState} onRegister={onRegister} onInfoTooltipOpen={onInfoTooltipOpen}/>
+              <Register
+                isSubmitDataSendState={isSubmitDataSendState}
+                handleSubmitDataSendState={handleSubmitDataSendState}
+                onRegister={onRegister}
+                onInfoTooltipOpen={onInfoTooltipOpen}
+                message={message}
+              />
             </Route>
 
             <Route path="/sign-in"> {/* авторизация пользователя - вход */}
               <Header routePathName={ 'Регистрация' } routePath={ '/sign-up' } />
-              <Login isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState} onLogin={onLogin}/>
+              <Login
+                isSubmitDataSendState={isSubmitDataSendState}
+                handleSubmitDataSendState={handleSubmitDataSendState}
+                onLogin={onLogin}
+                message={message}
+              />
             </Route>
 
-            <ProtectedRoute path="/" loggedIn={loggedIn} component={Main} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onClose={onClose} closeAllPopups={closeAllPopups} cards={cards} onCardLike={handleCardLike} setOnClose={setOnClose} onCardDeleteClick={handleCardDeleteClick} />
+            <ProtectedRoute
+              path="/"
+              loggedIn={loggedIn}
+              component={Main}
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onClose={onClose}
+              closeAllPopups={closeAllPopups}
+              cards={cards}
+              onCardLike={handleCardLike}
+              setOnClose={setOnClose}
+              onCardDeleteClick={handleCardDeleteClick}
+            />
           </Switch>
 
           <Route>
@@ -283,15 +353,44 @@ function App() {
         </div>
         <Footer />
 
-        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={onClose} closeAllPopups={closeAllPopups} isRegister={isRegister}/>
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={onClose}
+          closeAllPopups={closeAllPopups}
+          isRegister={isRegister}
+        />
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          isSubmitDataSendState={isSubmitDataSendState}
+          handleSubmitDataSendState={handleSubmitDataSendState}
+        />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+          isSubmitDataSendState={isSubmitDataSendState}
+          handleSubmitDataSendState={handleSubmitDataSendState}
+        />
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+          isSubmitDataSendState={isSubmitDataSendState}
+          handleSubmitDataSendState={handleSubmitDataSendState}
+        />
 
-        <PopupDeleteConfirm isOpen={isCardDeletePopupOpen} onClose={closeAllPopups} onCardDelete={handleCardDeleteSubmit} isSubmitDataSendState={isSubmitDataSendState} handleSubmitDataSendState={handleSubmitDataSendState}/>
+        <PopupDeleteConfirm
+          isOpen={isCardDeletePopupOpen}
+          onClose={closeAllPopups}
+          onCardDelete={handleCardDeleteSubmit}
+          isSubmitDataSendState={isSubmitDataSendState}
+          handleSubmitDataSendState={handleSubmitDataSendState}
+        />
       </CurrentUserContext.Provider>
     </div>
   );

@@ -15,7 +15,8 @@
 
 @media all and (min-width: 300px) and (max-width: 550px) {
   .infotooltip__container {
-    left: calc(50% - 109px);
-    width: 218px;
+    left: calc(50% - 140px);
+    width: 280px;
+    height: 308px;
   }
 }

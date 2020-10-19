@@ -1,12 +1,15 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import * as apiAuth from '../utils/apiAuth';
 import { withRouter } from 'react-router-dom';
 
-function Login({isSubmitDataSendState, handleSubmitDataSendState, onLogin}) {
+function Login({
+  isSubmitDataSendState,
+  handleSubmitDataSendState,
+  onLogin,
+  message,
+}) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [message, setMessage] = React.useState('');
 
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
@@ -18,27 +21,8 @@ function Login({isSubmitDataSendState, handleSubmitDataSendState, onLogin}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setMessage('');
-    apiAuth.login(email, password)
-    .then((res) => {
-      if (res.token) {
-        setEmail(localStorage.getItem('email'));
-        onLogin();
-      }
-    })
-    .catch((err) => {
-      if(err.status === 401) {
-        setMessage('Пользователь с email не найден');
-      } else if (err.status === 400) {
-        setMessage('Не передано одно из полей');
-      } else {
-        setMessage('Что-то пошло не так!');
-        console.log(err);
-      }
-    })
-    .finally(() => {
-      handleSubmitDataSendState();
-    });
+
+    onLogin(email, password);
   }
 
   return(

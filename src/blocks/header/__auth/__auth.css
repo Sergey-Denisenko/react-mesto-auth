@@ -11,3 +11,15 @@
   cursor: pointer;
   opacity: 0.6;
 }
+
+/* @media all and (min-width: 300px) and (max-width: 550px) {
+  .header__auth {
+
+  }
+}
+
+@media all and (min-width: 300px) and (max-width: 767px) {
+  .header__auth {
+
+  }
+} */

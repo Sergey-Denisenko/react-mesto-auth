@@ -1,13 +1,16 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import * as apiAuth from '../utils/apiAuth';
-import { withRouter, useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister, onInfoTooltipOpen}) {
-  const history = useHistory();
+function Register({
+  isSubmitDataSendState,
+  handleSubmitDataSendState,
+  onRegister,
+  message,
+}) {
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [message, setMessage] = React.useState('');
 
   function handleChangeEmail(evt) {
     setEmail(evt.target.value);
@@ -19,28 +22,8 @@ function Register({isSubmitDataSendState, handleSubmitDataSendState, onRegister,
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    setMessage('');
-    apiAuth.register(email, password)
-    .then(res => res)
-    .then((data) => {
-      if(data) {
-      onRegister();
-      onInfoTooltipOpen();
-      history.push('/sign-in');
-      }
-    })
-    .catch((err) => {
-      if(err.status === 400) {
-        onInfoTooltipOpen();
-        setMessage('Некорректно заполнено одно из полей ');
-      } else {
-        setMessage('Что-то пошло не так!');
-        console.log(err);
-      }
-    })
-    .finally(() => {
-      handleSubmitDataSendState();
-    });
+
+    onRegister(email, password);
   }
 
   return(

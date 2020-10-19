@@ -16,8 +16,8 @@
 
 @media all and (min-width: 300px) and (max-width: 550px) {
   .register__form-email {
-    font-size: 12px;
-    line-height: 12px;
-    padding-bottom: 8px;
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 13px;
   }
 }

@@ -10,7 +10,7 @@ function InfoTooltip({isOpen, closeAllPopups, isRegister}) {
         <form id="form-popup" className="infotooltip__container">
           <img className="infotooltip__image" src={successImagePath} alt="Успешная регистрация"/>
           <p className="infotooltip__message">Вы успешно зарегистрировались!</p>
-          <button onClick={closeAllPopups} type="button" className="popup__form-close-button popup__close-button" />
+          <button onClick={closeAllPopups} type="button" className="infotooltip__close-button" />
         </form>
       </div>
       ) : isRegister === false && isOpen ? (
@@ -18,7 +18,7 @@ function InfoTooltip({isOpen, closeAllPopups, isRegister}) {
         <form id="form-popup" className="infotooltip__container">
             <img className="infotooltip__image" src={unSuccessImagePath}  alt="Регистрация не пройдена"/>
             <p className="infotooltip__message">Что-то пошло не так! Попробуйте ещё раз.</p>
-          <button onClick={closeAllPopups} type="button" className="popup__form-close-button popup__close-button" />
+          <button onClick={closeAllPopups} type="button" className="infotooltip__close-button" />
         </form>
       </div>
     ) : ''

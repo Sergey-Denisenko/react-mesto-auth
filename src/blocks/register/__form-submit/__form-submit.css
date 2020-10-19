@@ -9,7 +9,6 @@
   line-height: 22px;
   font-weight: 400;
   font-style: normal;
-  /* margin-top: 48px; */
   margin-top: 216px;
   padding: 0;
   transition: opacity 0.15s linear 0s;
@@ -23,9 +22,9 @@
 
 @media all and (min-width: 300px) and (max-width: 550px) {
   .register__form-submit  {
-    margin-top: 36px;
-    font-size: 14px;
-    line-height: 17px;
-    height: 40px;
+    margin-top: 158px;
+    font-size: 16px;
+    line-height: 19px;
+    height: 46px;
   }
 }

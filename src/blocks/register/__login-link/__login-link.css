@@ -13,3 +13,10 @@
     cursor: pointer;
     opacity: 0.6;
   }
+
+  @media all and (min-width: 300px) and (max-width: 550px) {
+    .register__login-link {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }

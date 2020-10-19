@@ -12,3 +12,10 @@
 .header__auth_link:hover {
   cursor: pointer;
 }
+
+@media all and (min-width: 300px) and (max-width: 767px) {
+  .header__auth_link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

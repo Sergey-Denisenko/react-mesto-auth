@@ -2,7 +2,10 @@
 @import url(./__auth/__auth.css);
 @import url(./__auth/_link/_link.css);
 @import url(./__auth/_link/_link-exit.css);
+@import url(./__auth/_link/_visible/_visible.css);
 @import url(./__auth/_email-user/_email-user.css);
+@import url(./__auth/_email-user/_visible/_visible.css);
+@import url(./__auth/_menu-icon/_menu-icon.css);
 
 .header {
   margin: 45px 199px 0px;

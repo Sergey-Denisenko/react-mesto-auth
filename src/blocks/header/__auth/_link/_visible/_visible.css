@@ -1,0 +1,9 @@
+.header__auth_link_visible {
+
+}
+
+@media all and (min-width: 300px) and (max-width: 767px) {
+  .header__auth_link_visible {
+    display: none;
+  }
+}
