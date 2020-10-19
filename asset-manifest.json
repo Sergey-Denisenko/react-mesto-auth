@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.9f72913a.chunk.css",
-    "main.js": "/static/js/main.a1d5b379.chunk.js",
-    "main.js.map": "/static/js/main.a1d5b379.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.1de49aa2.js",
-    "runtime-main.js.map": "/static/js/runtime-main.1de49aa2.js.map",
-    "static/js/2.f0f66cc5.chunk.js": "/static/js/2.f0f66cc5.chunk.js",
-    "static/js/2.f0f66cc5.chunk.js.map": "/static/js/2.f0f66cc5.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.4c9a979fa0f81b3712084f2174cf3ce5.js": "/precache-manifest.4c9a979fa0f81b3712084f2174cf3ce5.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.9f72913a.chunk.css.map": "/static/css/main.9f72913a.chunk.css.map",
-    "static/js/2.f0f66cc5.chunk.js.LICENSE.txt": "/static/js/2.f0f66cc5.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/static/media/heart_like_black.5bbb05f7.svg",
-    "static/media/Vector_white.svg": "/static/media/Vector_white.c6f11019.svg"
+    "main.css": "/world.students.nomoreparties.xyz/static/css/main.2da2471a.chunk.css",
+    "main.js": "/world.students.nomoreparties.xyz/static/js/main.1eb12273.chunk.js",
+    "main.js.map": "/world.students.nomoreparties.xyz/static/js/main.1eb12273.chunk.js.map",
+    "runtime-main.js": "/world.students.nomoreparties.xyz/static/js/runtime-main.fc3e2455.js",
+    "runtime-main.js.map": "/world.students.nomoreparties.xyz/static/js/runtime-main.fc3e2455.js.map",
+    "static/js/2.f0f66cc5.chunk.js": "/world.students.nomoreparties.xyz/static/js/2.f0f66cc5.chunk.js",
+    "static/js/2.f0f66cc5.chunk.js.map": "/world.students.nomoreparties.xyz/static/js/2.f0f66cc5.chunk.js.map",
+    "index.html": "/world.students.nomoreparties.xyz/index.html",
+    "precache-manifest.8188bc79c5e9f6d24e24fab708ed015e.js": "/world.students.nomoreparties.xyz/precache-manifest.8188bc79c5e9f6d24e24fab708ed015e.js",
+    "service-worker.js": "/world.students.nomoreparties.xyz/service-worker.js",
+    "static/css/main.2da2471a.chunk.css.map": "/world.students.nomoreparties.xyz/static/css/main.2da2471a.chunk.css.map",
+    "static/js/2.f0f66cc5.chunk.js.LICENSE.txt": "/world.students.nomoreparties.xyz/static/js/2.f0f66cc5.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/world.students.nomoreparties.xyz/static/media/heart_like_black.5bbb05f7.svg",
+    "static/media/Vector_white.svg": "/world.students.nomoreparties.xyz/static/media/Vector_white.c6f11019.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.1de49aa2.js",
+    "static/js/runtime-main.fc3e2455.js",
     "static/js/2.f0f66cc5.chunk.js",
-    "static/css/main.9f72913a.chunk.css",
-    "static/js/main.a1d5b379.chunk.js"
+    "static/css/main.2da2471a.chunk.css",
+    "static/js/main.1eb12273.chunk.js"
   ]
 }
