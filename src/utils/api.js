@@ -5,14 +5,26 @@ class Api {
     this._optionsApi = optionsApi;
     this._baseUrl = this._optionsApi.baseUrl;
     this._headers = this._optionsApi.headers
+
+    console.log('this._optionsApi');
+    console.log(this._optionsApi);
+    console.log('this._baseUrl');
+    console.log(this._baseUrl);
+    console.log('this._headers');
+    console.log(this._headers);
   }
 
   getUserDataDefaultFromServer() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers:{
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       }
+    }
     )
       .then((res) => {
+        console.log('res in getUserDataDefaultFromServer');
+        console.log(res);
         if (res.ok) {
           return res.json();
         }
@@ -21,11 +33,17 @@ class Api {
   }
 
   getCardDefaultFromServer() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+    return fetch(`${this._baseUrl}`, {
+      // return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      }, method: 'GET',
       }
     )
       .then((res) => {
+        console.log('res in api.js->getCardDefaultFromServer');
+        console.log(res);
         if (res.ok) {
           return res.json();
         }
@@ -36,7 +54,10 @@ class Api {
   setNewDataUser(userData) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({
         name: userData.name,
         about: userData.description
@@ -53,13 +74,18 @@ class Api {
   addNewCardToServer(userCardData) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({
         name: userCardData.name,
         link: userCardData.link
       })
     })
       .then((res) => {
+        console.log('res in api.js->addNewCardToServer 001');
+        console.log(res);
         if (res.ok) {
           return res.json();
         }
@@ -70,7 +96,10 @@ class Api {
   deleteCardFromServer(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then((res) => {
         if (res.ok) {
@@ -83,7 +112,10 @@ class Api {
   likePlus(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: this._headers
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then((res) => {
         if (res.ok) {
@@ -96,7 +128,10 @@ class Api {
   likeMinus(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
       .then((res) => {
         if (res.ok) {
@@ -109,7 +144,10 @@ class Api {
   avatarUpdate(newAvatarLink) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
       body: JSON.stringify({
         avatar: newAvatarLink.avatar
       })

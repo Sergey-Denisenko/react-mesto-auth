@@ -10,7 +10,7 @@ function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText
   return (
 
     isOpen && (name === "login") ? (
-      <form id="form-popup" className="register__container popup__form" noValidate name={name} onSubmit={onSubmit}>
+      <form className="register__container popup__form" noValidate name={name} onSubmit={onSubmit}>
         <h2 className="register__form-title">{title}</h2>
         <fieldset className="register__form-profile popup__fieldset">
           {children}
@@ -21,7 +21,7 @@ function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText
         </fieldset>
       </form>
     ) : ( isOpen && (name === "register")) ? (
-      <form id="form-popup" className="register__container popup__form" noValidate name={name} onSubmit={onSubmit}>
+      <form className="register__container popup__form" noValidate name={name} onSubmit={onSubmit}>
         <h2 className="register__form-title">{title}</h2>
         <fieldset className="register__form-profile popup__fieldset">
           {children}
@@ -33,7 +33,7 @@ function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText
       </form>
     ) : (
       <div className={`popup popup_type_${name} popup__overlay ${isOpen ? 'popup_opened' : ''}`}>
-        <form id="form-popup" className="popup__container popup__form" noValidate name={name} onSubmit={onSubmit}>
+        <form className="popup__container popup__form" noValidate name={name} onSubmit={onSubmit}>
           <h2 className="popup__form-title">{title}</h2>
           <fieldset className="popup__form-profile popup__fieldset">
             {children}

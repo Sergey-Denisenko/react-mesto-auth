@@ -8,10 +8,20 @@ export const optionObject = {
 };
 
 const optionsApi = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
+  baseUrl: 'https://api.world.students.nomoreparties.xyz',
   headers: {
-    authorization: 'b301150e-99e5-48e9-bfa2-35f39eea584a',
+    // 'authorization': `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 };
+
 export default optionsApi;
+
+// const optionsApi = {
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
+//   // baseUrl: 'https://world.students.nomoreparties.xyz',
+//   headers: {
+//     authorization: 'b301150e-99e5-48e9-bfa2-35f39eea584a',
+//     'Content-Type': 'application/json'
+//   }
+// };

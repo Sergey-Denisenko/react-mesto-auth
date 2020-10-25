@@ -29,9 +29,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = React.useState(false); //Переменная состояния
-  // const handleCardDeletePopupOpen = () => {
-  //   setIsCardDeletePopupOpen(!isCardDeletePopupOpen);
-  // };
+
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   const handleEditAvatarClick = () => {
@@ -55,13 +53,20 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
+  const actualUserData = React.useContext(CurrentUserContext);
+
   function handleUpdateUser(userData) {
+    console.log('userData in handleUpdateUser');
+    console.log(userData);
     api.setNewDataUser(userData)
     .then((userData) => {
+      console.log('userData in handleUpdateUser .then');
+      console.log(userData);
       setCurrentUser({
         ...currentUser,
-        name: userData.name,
-        description: userData.about,
+
+        name: userData.data.name,
+        description: userData.data.about,
       });
       closeAllPopups();
     })
@@ -80,7 +85,7 @@ function App() {
     .then((userData) => {
       setCurrentUser({
         ...currentUser,
-        avatar: userData.avatar,
+        avatar: userData.data.avatar,
       });
       closeAllPopups();
     })
@@ -98,24 +103,45 @@ function App() {
 // Получение данных пользователя и массива карточек с сервера
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({ name: '', description: '', avatar: ' ', _id: '' });
+  // const handleSetCurrentUserData = () => {
+  //   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  // };
 
   React.useEffect(() => {
+      tokenCheck();
     Promise.all([
       api.getUserDataDefaultFromServer(),
       api.getCardDefaultFromServer()
     ])
     .then(([userData, cardDefault]) => {
-      setCards(cardDefault);
+      console.log('res in Promise.all App.js string 103');
+      console.log('userData');
+      console.log(userData);
+        console.log('userData.data._id');
+        console.log(userData.data._id);
       setCurrentUser({
         ...currentUser,
-        name: userData.name,
-        description: userData.about,
-        avatar: userData.avatar,
-        _id: userData._id,
+        // name: userData.name,
+        // description: userData.about,
+        // avatar: userData.avatar,
+        // _id: userData._id,
+        name: userData.data.name,
+        description: userData.data.about,
+        avatar: userData.data.avatar,
+        _id: userData.data._id,
       });
+      console.log('cardDefault');
+      console.log(cardDefault);
+      setCards(cardDefault);
+      // setCards({
+      //   ...cards,
+      //   cardDefault
+      // });
     })
     .catch((err) => {
       console.error(err);
+      console.log('ошибка в useeffect App.js err');
+      console.log(err);
     })
     return () => {
     };
@@ -123,11 +149,17 @@ function App() {
   }, []);
 
   function handleAddPlaceSubmit(userCardData) {
+
     api.addNewCardToServer(userCardData)
     .then((newCard) => {
+      console.log('newCard000');
+      console.log(newCard);
       setCards(
+        // [...cards, newCard]
         [...cards, newCard]
       );
+      console.log('newCard111');
+      console.log(newCard);
       closeAllPopups();
     })
     .catch((err) => {
@@ -142,17 +174,31 @@ function App() {
 
 //Функция проставления лайка
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log('card in App.js -> handleCardLike');
+    console.log(card);
+    console.log('card.likes in App.js -> handleCardLike');
+    console.log(card.likes);
+    console.log('currentUser in App.js -> handleCardLike');
+    console.log(currentUser);
+    const isLiked = card.likes.some(i => i === currentUser._id);
+    console.log('isLiked in App.js -> handleCardLike');
+    console.log(isLiked);
     if (!isLiked) {
+      console.log('L1');
       api.likePlus(card._id)
       .then((newCard) => {
+        console.log('newCard 1 in App.js -> handleCardLike');
+        console.log(newCard);
         const newCards = cards.map((item) => item._id === card._id ? newCard : item);
         setCards(newCards);
       });
     }
     if (isLiked) {
+      console.log('L2');
       api.likeMinus(card._id)
       .then((newCard) => {
+        console.log('newCard 2 in App.js -> handleCardLike');
+        console.log(newCard);
         const newCards = cards.map((item) => item._id === card._id ? newCard : item);
         setCards(newCards);
       });
@@ -170,6 +216,8 @@ function App() {
     evt.preventDefault();
     api.deleteCardFromServer(tempCardForDelete._id)
     .then(() => {
+      console.log('cards in handleCardDeleteSubmit 999');
+      console.log(cards);
       const newCards = cards.filter((item) => item._id !== tempCardForDelete._id ? true : false);
       setCards(newCards);
       closeAllPopups();
@@ -217,10 +265,13 @@ function App() {
     })
     .catch((err) => {
       if(err.status === 400) {
+        console.log('errX');
+        console.log(err);
         onInfoTooltipOpen();
         setMessage('Некорректно заполнено одно из полей ');
       } else {
         setMessage('Что-то пошло не так!');
+        console.log('errY');
         console.log(err);
       }
     })
@@ -237,19 +288,43 @@ function App() {
     setClearMessage();
     apiAuth.login(email, password)
     .then((res) => {
+      console.log('res');
+      console.log(res);
+      console.log('res.token');
+      console.log(res.token);
       if (res.token) {
         setEmail(localStorage.getItem('email'));
-        setLoggedIn(true);
+        // setLoggedIn(true);
+        // history.push('/');
         tokenCheck();
+        api.getCardDefaultFromServer()
+        .then((cardDefault) => {
+          console.log('cardDefault');
+          console.log(cardDefault);
+          setCards(cardDefault);
+        })
+        .catch((err) => {
+          console.error(err);
+          console.log('ошибка в useeffect App.js err');
+          console.log(err);
+        })
+        return () => {
+        };
       }
     })
+    // .then((res) => {
+    //   if (res.token) {
+    //     tokenCheck();
+    //   }
+    // })
     .catch((err) => {
       if(err.status === 401) {
         setMessage('Пользователь с email не найден');
       } else if (err.status === 400) {
         setMessage('Не передано одно из полей');
       } else {
-        setMessage('Что-то пошло не так!');
+        setMessage('Что-то пошло не так! 000909999');
+        console.log('Что-то пошло не так! 000909999');
         console.log(err);
       }
     })
@@ -266,38 +341,79 @@ function App() {
     setPassword('');
     setLoggedIn(false);
     setIsRegister(false);
+
+    // const [currentUser, setCurrentUser] = React.useState({ name: '', description: '', avatar: ' ', _id: '' });
+    setCurrentUser({
+      ...currentUser,
+      name: '',
+      description: '',
+      avatar: '',
+      _id: '',
+    });
   };
 
   const history = useHistory();
 
   const tokenCheck = () => {
     const token = localStorage.getItem('token');
+    console.log('token in localStorage');
+    console.log(token);
     if(token) {
+      console.log('token here');
+      console.log(token);
       apiAuth.getContent(token)
-        .then(res => res)
-        .then((res) => {
+        .then(res => {
+          console.log('первый res in tokenCheck');
+          console.log(res);
+          return res;
+        })
+        // .then((res) => {
+        //   console.log('второй res in tokenCheck');
+        //   console.log(res);
+        .then((userData) => {
+          console.log('второй res in tokenCheck');
+          console.log(userData);
+        setCurrentUser({
+          ...currentUser,
+          name: userData.data.name,
+          description: userData.data.about,
+          avatar: userData.data.avatar,
+          _id: userData.data._id,
+        })
+
           setLoggedIn(true);
+          console.log('второй res in tokenCheck 101');
           history.push('/');
+          // history.push('/cards');
+          console.log('второй res in tokenCheck 102');
           setEmail(localStorage.getItem('email'));
+          console.log('второй res in tokenCheck 103');
         })
         .catch((err) => {
           if(err.status === 401) {
             console.log('Переданный токен некорректен');
+            console.log('err -> tokencheck -> catch - 401');
+            console.log(err);
           } else if(err.status === 400) {
-            console.log('Токен не передан или передан не в том формате');
+            console.log('Токен не передан или передан не в том формате 777');
+            console.log('err -> tokencheck -> catch - 400');
+            console.log(err);
           } else {
             setLoggedIn(false);
             history.push('/sign-in');
+            // console.log(err);
+            console.log('err -> tokencheck -> catch - else');
             console.log(err);
           }
         });
     }
   };
 
-  useEffect(() => {
-    tokenCheck();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   tokenCheck();
+  //   // eslint-disable-next-line
+
+  // }, []);
 
   return (
     <div className="app">
