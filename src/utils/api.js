@@ -5,13 +5,6 @@ class Api {
     this._optionsApi = optionsApi;
     this._baseUrl = this._optionsApi.baseUrl;
     this._headers = this._optionsApi.headers
-
-    console.log('this._optionsApi');
-    console.log(this._optionsApi);
-    console.log('this._baseUrl');
-    console.log(this._baseUrl);
-    console.log('this._headers');
-    console.log(this._headers);
   }
 
   getUserDataDefaultFromServer() {
@@ -23,8 +16,6 @@ class Api {
     }
     )
       .then((res) => {
-        console.log('res in getUserDataDefaultFromServer');
-        console.log(res);
         if (res.ok) {
           return res.json();
         }
@@ -42,8 +33,6 @@ class Api {
       }
     )
       .then((res) => {
-        console.log('res in api.js->getCardDefaultFromServer');
-        console.log(res);
         if (res.ok) {
           return res.json();
         }

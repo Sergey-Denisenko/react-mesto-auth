@@ -6,21 +6,9 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, closeAllPopups, cards, onCardLike, setOnClose, onCardDeleteClick}) {
 
   const actualUserData = React.useContext(CurrentUserContext); //Подписка на контекст
-  console.log('actualUserData in Main.js');
-  console.log(actualUserData);
-  console.log('actualUserData.name in Main.js');
-  console.log(actualUserData.name);
 
   const [selectedCard, setSelectedCard] = React.useState(); //Переменная состояния
   const [isOpen, setIsOpen] = React.useState(false); //Переменная состояния
-console.log('cards in Main.js');
-console.log(cards);
-// console.log('cards._id in Main.js');
-// console.log(cards._id);
-// console.log('cards.data in Main.js');
-// console.log(cards.data);
-// console.log('cards.data._id in Main.js');
-// console.log(cards.data._id);
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setIsOpen(!isOpen);
@@ -46,7 +34,6 @@ console.log(cards);
         </section>
 
         <section className="card-container">
-          {/* {cards.data.map((card) => ( */}
           {cards.map((card) => (
             <div key={card._id}>
               <Card card={card} onCardClick={handleCardClick} onCardLike={onCardLike}  onCardDeleteClick={onCardDeleteClick} />
