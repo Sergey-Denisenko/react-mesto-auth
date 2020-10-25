@@ -155,7 +155,6 @@ function App() {
       console.log('newCard000');
       console.log(newCard);
       setCards(
-        // [...cards, newCard]
         [...cards, newCard]
       );
       console.log('newCard111');
