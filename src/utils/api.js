@@ -24,8 +24,8 @@ class Api {
   }
 
   getCardDefaultFromServer() {
-    return fetch(`${this._baseUrl}`, {
-      // return fetch(`${this._baseUrl}/cards`, {
+    // return fetch(`${this._baseUrl}`, {
+      return fetch(`${this._baseUrl}/cards`, {
       headers: {
         ...this._headers,
         'authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -99,7 +99,8 @@ class Api {
   }
 
   likePlus(id) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    // return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
       headers: {
         ...this._headers,
@@ -115,7 +116,8 @@ class Api {
   }
 
   likeMinus(id) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    // return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: {
         ...this._headers,

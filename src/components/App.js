@@ -223,7 +223,12 @@ function App() {
       if(err.status === 400) {
         onInfoTooltipOpen();
         setMessage('Некорректно заполнено одно из полей ');
-      } else {
+      } else
+      if (err.status === 409) {
+        onInfoTooltipOpen();
+        setMessage('Пользователь с таким email уже существует');
+      } else
+      {
         setMessage('Что-то пошло не так!');
       }
     })
@@ -247,8 +252,6 @@ function App() {
         tokenCheck();
         api.getCardDefaultFromServer()
         .then((cardDefault) => {
-          console.log('cardDefault');
-          console.log(cardDefault);
           setCards(cardDefault);
         })
         .catch((err) => {
