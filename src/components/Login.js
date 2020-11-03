@@ -7,6 +7,7 @@ function Login({
   handleSubmitDataSendState,
   onLogin,
   message,
+  setClearMessage,
 }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -26,7 +27,7 @@ function Login({
   }
 
   return(
-    <PopupWithForm name="login" title="Вход" isOpen={true} onSubmit={handleSubmit} isSubmitDataSendState={isSubmitDataSendState} submitButtonText = {isSubmitDataSendState === false ? 'Войти' : 'Выполняется вход...'} handleSubmitDataSendState={handleSubmitDataSendState}>
+    <PopupWithForm name="login" title="Вход" isOpen={true} onSubmit={handleSubmit} isSubmitDataSendState={isSubmitDataSendState} submitButtonText = {isSubmitDataSendState === false ? 'Войти' : 'Выполняется вход...'} handleSubmitDataSendState={handleSubmitDataSendState} setClearMessage={setClearMessage}>
       <input id="email-input" type="email" value={email} onChange={handleChangeEmail} className="register__form-email popup__input" name="email" minLength="2" maxLength="40" autoComplete="off" required placeholder="Email" />
       <span id="email-input-error" className="register__error" />
       <input id="password-input" type="password" value={password} onChange={handleChangePassword} className="register__form-password popup__input" name="password" minLength="2" maxLength="200" autoComplete="off" required placeholder="Пароль" />

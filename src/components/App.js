@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory, withRouter } from 'react-router-dom';
 import Register from './Register.js';
 import Login from './Login.js';
@@ -19,6 +19,7 @@ import PopupDeleteConfirm from './PopupDeleteConfirm';
 import * as apiAuth from '../utils/apiAuth';
 
 function App() {
+
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   // eslint-disable-next-line
@@ -27,22 +28,37 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-
-  const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = React.useState(false); //Переменная состояния
-
+  const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = React.useState(false); //Переменная состояни
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isSubmitDataSendState, setIsSubmitDataSendState] = React.useState(false); // Текст на кнопках / состояние
+  const [isRegister, setIsRegister] = React.useState(false); // Состояние зарегистрирован пользователь или нет
 
-  const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  };
+  const [cards, setCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({ name: '', description: '', avatar: ' ', _id: '' });
+  const [message, setMessage] = React.useState(''); // Устанавливаю сообщение об ошибке
+  const [tempCardForDelete, setTempCardForDelete] = React.useState(); //Переменная состояния
+
+  const history = useHistory();
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setClearMessage();// Устанавливаю в message пустую строку (отработка ошибок)
+  };
+
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setClearMessage();// Устанавливаю в message пустую строку (отработка ошибок)
   };
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setClearMessage();// Устанавливаю в message пустую строку (отработка ошибок)
   };
+
+// Очистка поля message
+const setClearMessage = () => {
+  setMessage('');
+}
 
   const closeAllPopups = () => {
     setOnClose(!onClose);
@@ -53,54 +69,9 @@ function App() {
     setIsInfoTooltipOpen(false);
   };
 
-  const actualUserData = React.useContext(CurrentUserContext);
-
-  function handleUpdateUser(userData) {
-    api.setNewDataUser(userData)
-    .then((userData) => {
-      setCurrentUser({
-        ...currentUser,
-        name: userData.data.name,
-        description: userData.data.about,
-      });
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      setIsSubmitDataSendState(false);
-    })
-    return () => {
-    };
-  }
-
-  function handleUpdateAvatar(newAvatarLink) {
-    api.avatarUpdate(newAvatarLink)
-    .then((userData) => {
-      setCurrentUser({
-        ...currentUser,
-        avatar: userData.data.avatar,
-      });
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      setIsSubmitDataSendState(false);
-    });
-
-    return () => {
-    };
-  }
-
 // Получение данных пользователя и массива карточек с сервера
-  const [cards, setCards] = React.useState([]);
-  const [currentUser, setCurrentUser] = React.useState({ name: '', description: '', avatar: ' ', _id: '' });
-
   React.useEffect(() => {
-      tokenCheck();
+    tokenCheck();
     Promise.all([
       api.getUserDataDefaultFromServer(),
       api.getCardDefaultFromServer()
@@ -125,8 +96,66 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  function handleAddPlaceSubmit(userCardData) {
+// Функция обновления данных пользователя
+  function handleUpdateUser(userData) {
+    api.setNewDataUser(userData)
+    .then((userData) => {
+      setCurrentUser({
+        ...currentUser,
+        name: userData.data.name,
+        description: userData.data.about,
+      });
+      closeAllPopups();
+    })
+    // .catch((err) => {
+    //   console.error(err);
+    // })
+    .catch((err) => {
+      if(err === 400) {
+        setMessage('Одно из полей заполнено не корректно');// Отработка ошибок в попапе редактирования инфо о пользователе
+      } else
+      {
+        setMessage('Что-то пошло не так!');// Отработка ошибок в попапе редактирования инфо о пользователе
+      }
+    })
+    .finally(() => {
+      setIsSubmitDataSendState(false);
+    })
+    return () => {
+    };
+  }
 
+// Функция обновления аватара
+  function handleUpdateAvatar(newAvatarLink) {
+    api.avatarUpdate(newAvatarLink)
+    .then((userData) => {
+      setCurrentUser({
+        ...currentUser,
+        avatar: userData.data.avatar,
+      });
+      closeAllPopups();
+    })
+    // .catch((err) => {
+    //   console.error(err);
+    // })
+    .catch((err) => {
+      if(err === 400) {
+        setMessage('Некорректный URL');// Отработка ошибки в попапе редактирования avatar
+      } else
+      {
+        setMessage('Что-то пошло не так!');// Отработка ошибки в попапе редактирования avatar
+      }
+    })
+    .finally(() => {
+      setIsSubmitDataSendState(false);
+    });
+
+    return () => {
+    };
+  }
+
+// Функция добавления новой карточки
+  function handleAddPlaceSubmit(userCardData) {
     api.addNewCardToServer(userCardData)
     .then((newCard) => {
       setCards(
@@ -134,9 +163,18 @@ function App() {
       );
       closeAllPopups();
     })
+    // .catch((err) => {
+    //   console.error(err);
+    // })
     .catch((err) => {
-      console.error(err);
+      if(err === 400) {
+        setMessage('Одно из полей заполнено не корректно');// Отработка ошибок в попапе редактирования инфо о пользователе
+      } else
+      {
+        setMessage('Что-то пошло не так!');// Отработка ошибок в попапе редактирования инфо о пользователе
+      }
     })
+
     .finally(() => {
       setIsSubmitDataSendState(false);
     })
@@ -163,8 +201,6 @@ function App() {
     }
   }
 
-  const [tempCardForDelete, setTempCardForDelete] = React.useState(); //Переменная состояния
-
   const handleCardDeleteClick = (card) => {
     setIsCardDeletePopupOpen(!isCardDeletePopupOpen);
     setTempCardForDelete(card);
@@ -188,26 +224,19 @@ function App() {
     }
   }
 
-// Тескт на кнопках при загрухке данных
-  const [isSubmitDataSendState, setIsSubmitDataSendState] = React.useState(false);
-
+// Установка состояния нажатия кнопки для отображения на кнопке другого текста
   const handleSubmitDataSendState = () => {
     setIsSubmitDataSendState(!isSubmitDataSendState);
   };
 
-// Добавление нового функционала
-
-  const [isRegister, setIsRegister] = React.useState(false);
-
+// Установка стейта зарегистрирован пользователь или нет
   const handleIsRegister = () => {
     setIsRegister(!isRegister);
   };
 
-  const setClearMessage = () => {
-    setMessage('');
-  }
 
-  const [message, setMessage] = React.useState('');
+
+  // Регистрация нового пользователя
   const onRegister = (email, password) => {
     setClearMessage();
     apiAuth.register(email, password)
@@ -237,18 +266,18 @@ function App() {
     });
   };
 
+// Установка стейта в значение true для открытия попапа при регистрации
   const onInfoTooltipOpen = () => {
     setIsInfoTooltipOpen(true);
   };
 
+  // Авторизация пользователя
   const onLogin = (email, password) => {
     setClearMessage();
     apiAuth.login(email, password)
     .then((res) => {
       if (res.token) {
         setEmail(localStorage.getItem('email'));
-        // setLoggedIn(true);
-        // history.push('/');
         tokenCheck();
         api.getCardDefaultFromServer()
         .then((cardDefault) => {
@@ -275,6 +304,7 @@ function App() {
     });
   };
 
+// Выход из аккаунта пользователя
   const onSignOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
@@ -283,8 +313,7 @@ function App() {
     setPassword('');
     setLoggedIn(false);
     setIsRegister(false);
-
-    // const [currentUser, setCurrentUser] = React.useState({ name: '', description: '', avatar: ' ', _id: '' });
+    setClearMessage();// Устанавливаю в message пустую строку (отработка ошибок)
     setCurrentUser({
       ...currentUser,
       name: '',
@@ -294,8 +323,7 @@ function App() {
     });
   };
 
-  const history = useHistory();
-
+// Проверка токена
   const tokenCheck = () => {
     const token = localStorage.getItem('token');
     if(token) {
@@ -331,12 +359,6 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   tokenCheck();
-  //   // eslint-disable-next-line
-
-  // }, []);
-
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
@@ -345,23 +367,25 @@ function App() {
 
           <Switch>
             <Route path="/sign-up"> {/* регистрация пользователя */}
-              <Header routePathName={ 'Войти' } routePath={ '/sign-in' } />
+              <Header routePathName={ 'Войти' } routePath={ '/sign-in' } setClearMessage={setClearMessage} />
               <Register
                 isSubmitDataSendState={isSubmitDataSendState}
                 handleSubmitDataSendState={handleSubmitDataSendState}
                 onRegister={onRegister}
                 onInfoTooltipOpen={onInfoTooltipOpen}
                 message={message}
+                setClearMessage={setClearMessage}
               />
             </Route>
 
             <Route path="/sign-in"> {/* авторизация пользователя - вход */}
-              <Header routePathName={ 'Регистрация' } routePath={ '/sign-up' } />
+              <Header routePathName={ 'Регистрация' } routePath={ '/sign-up' } setClearMessage={setClearMessage} />
               <Login
                 isSubmitDataSendState={isSubmitDataSendState}
                 handleSubmitDataSendState={handleSubmitDataSendState}
                 onLogin={onLogin}
                 message={message}
+                setClearMessage={setClearMessage}
               />
             </Route>
 
@@ -404,6 +428,7 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
           isSubmitDataSendState={isSubmitDataSendState}
           handleSubmitDataSendState={handleSubmitDataSendState}
+          message={message}
         />
 
         <EditProfilePopup
@@ -412,6 +437,7 @@ function App() {
           onUpdateUser={handleUpdateUser}
           isSubmitDataSendState={isSubmitDataSendState}
           handleSubmitDataSendState={handleSubmitDataSendState}
+          message={message}
         />
 
         <AddPlacePopup
@@ -420,6 +446,7 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
           isSubmitDataSendState={isSubmitDataSendState}
           handleSubmitDataSendState={handleSubmitDataSendState}
+          message={message}
         />
 
         <PopupDeleteConfirm

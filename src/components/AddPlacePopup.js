@@ -1,7 +1,9 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({isOpen, onClose, onAddPlace, isSubmitDataSendState, handleSubmitDataSendState}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace, isSubmitDataSendState, handleSubmitDataSendState,
+message,
+}) {
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
 
@@ -29,6 +31,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace, isSubmitDataSendState, hand
       <span id="name-input-add-card-error" className="popup__error" />
       <input id="link-input" type="url" value={link} onChange={handleChangeLink} className="popup-add-card__form-image-link popup__input" name="link" placeholder="Ссылка на картинку" autoComplete="off" required/>
       <span id="link-input-error" className="popup__error" />
+      <span id="link-input-error" className="popup__error popup__error_visible">{message}</span>
     </PopupWithForm>
   )
 }

@@ -56,7 +56,8 @@ class Api {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        // return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(res.status);
       })
   }
 
@@ -73,12 +74,11 @@ class Api {
       })
     })
       .then((res) => {
-        console.log('res in api.js->addNewCardToServer 001');
-        console.log(res);
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        // return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(res.status);
       })
   }
 
@@ -147,7 +147,8 @@ class Api {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        // return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(res.status);
       })
   }
 }

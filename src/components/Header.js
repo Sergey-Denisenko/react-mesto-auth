@@ -3,7 +3,7 @@ import headerPath from '../images/Vector_white.svg';
 import { Link } from 'react-router-dom';
 import menuIconPath from '../images/menu-icon.png';
 
-function Header({routePathName, routePath, emailUser, loggedIn, onSignOut}) {
+function Header({routePathName, routePath, emailUser, loggedIn, onSignOut, setClearMessage}) {
 
   return (
     loggedIn === true ? (
@@ -20,7 +20,7 @@ function Header({routePathName, routePath, emailUser, loggedIn, onSignOut}) {
       <header className="header">
         <img className="header__logo" src={headerPath} alt="Логотип"/>
         <div className="header__auth">
-          <Link to={routePath} className="header__auth_link">{routePathName}</Link>
+          <Link to={routePath} className="header__auth_link" onClick={setClearMessage}>{routePathName}</Link>
         </div>
       </header>
     )

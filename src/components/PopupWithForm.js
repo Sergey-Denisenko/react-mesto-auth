@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText = '', submitDeleteButtonText = '', handleSubmitDataSendState, children}) {
+function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText = '', submitDeleteButtonText = '', handleSubmitDataSendState, setClearMessage, children}) {
 
   if (onClose === true) {
     document.querySelector(`.popup`).classList.remove('popup_opened');
@@ -16,7 +16,7 @@ function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText
           {children}
           <button type="submit" className="register__form-submit register__button" onClick={handleSubmitDataSendState}>{submitButtonText}</button>
           <div className="register__form-login-link">
-            <Link to="/sign-up" className="register__login-link">Еще не зарегистрированы? Регистрация</Link>
+            <Link to="/sign-up" className="register__login-link" onClick={setClearMessage}>Еще не зарегистрированы? Регистрация</Link>
           </div>
         </fieldset>
       </form>
@@ -27,7 +27,7 @@ function PopupWithForm({name, title, isOpen, onClose, onSubmit, submitButtonText
           {children}
           <button type="submit" className="register__form-submit register__button" onClick={handleSubmitDataSendState}>{submitButtonText}</button>
           <div className="register__form-login-link">
-            <Link to="/sign-in" className="register__login-link">Уже зaрегистрированы? Войти</Link>
+            <Link to="/sign-in" className="register__login-link" onClick={setClearMessage}>Уже зaрегистрированы? Войти</Link>
           </div>
         </fieldset>
       </form>

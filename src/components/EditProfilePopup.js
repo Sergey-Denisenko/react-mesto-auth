@@ -2,7 +2,9 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext} from '../contexts/CurrentUserContext';
 
-function EditProfilePopup({isOpen, onClose, onUpdateUser, isSubmitDataSendState, handleSubmitDataSendState}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser, isSubmitDataSendState, handleSubmitDataSendState,
+message,
+}) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -36,6 +38,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, isSubmitDataSendState,
       <span id="name-input-profile-error" className="popup__error" />
       <input id="prof-input" type="text" value={description} onChange={handleChangeDescription} className="popup__form-about popup__input" name="prof" minLength="2" maxLength="200" autoComplete="off" required />
       <span id="prof-input-error" className="popup__error" />
+      <span id="name-input-profile-error" className="popup__error popup__error_visible">{message}</span>
     </PopupWithForm>
   )
 }
