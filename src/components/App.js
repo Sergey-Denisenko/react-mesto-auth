@@ -235,7 +235,6 @@ const setClearMessage = () => {
   };
 
 
-
   // Регистрация нового пользователя
   const onRegister = (email, password) => {
     setClearMessage();
